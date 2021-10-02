@@ -8,7 +8,8 @@ TIMESTMP=`date +%Y%m%d`
 
 while true;
 do
-        ${CURL_CMD} ${BASE_URL}${FARMERS_API}${STARTPAGE} |jq -r --arg tim $TIMESTMP '
+        TIMEDATA=`date --utc +%FT%TZ`
+		${CURL_CMD} ${BASE_URL}${FARMERS_API}${STARTPAGE} |jq -r --arg tim $TIMEDATA '
                  .data[]
                  |[$tim, .id,.attributes.points_24h,.attributes.ratio_24h,.attributes.tib_24h,.attributes.farmer_name]
                  |@csv
