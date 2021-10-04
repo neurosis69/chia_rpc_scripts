@@ -1,4 +1,4 @@
 #!/bin/bash
-
-curl -s --insecure --cert ~/.chia/mainnet/config/ssl/full_node/private_full_node.crt --key ~/.chia/mainnet/config/ssl/full_node/private_full_node.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8555/get_unfinished_block_headers| jq
+source initialize.sh
+curl -s --insecure --cert $SSLPATH/private_full_node.crt --key $SSLPATH/private_full_node.key -d '{}' -H "Content-Type: application/json" -X POST https://$TARGETIP:8555/get_unfinished_block_headers| jq
 {\rtf1}

@@ -1,11 +1,12 @@
 #!/bin/bash
+source initialize.sh
 curl -s --insecure \
-	--cert ~/.chia/mainnet/config/ssl/farmer/private_farmer.crt \
-	--key ~/.chia/mainnet/config/ssl/farmer/private_farmer.key \
+	--cert $SSLPATH/private_farmer.crt \
+	--key $SSLPATH/private_farmer.key \
 	-H "Content-Type: application/json" \
 	-d '{}' \
 	-X POST \
-	https://localhost:8559/get_harvesters \
+	https://$TARGETIP:8559/get_harvesters \
 		| jq -r '
 			.harvesters[] 
 				| {

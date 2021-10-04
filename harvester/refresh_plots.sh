@@ -1,3 +1,3 @@
 #!/bin/bash
-
-curl -s --insecure --cert ~/.chia/mainnet/config/ssl/harvester/private_harvester.crt --key ~/.chia/mainnet/config/ssl/harvester/private_harvester.key -d '{}' -H "Content-Type: application/json" -X POST https://localhost:8560/refresh_plots| jq
+source initialize.sh
+curl -s --insecure --cert $SSLPATH/private_harvester.crt --key $SSLPATH/private_harvester.key -d '{}' -H "Content-Type: application/json" -X POST https://$TARGETIP:8560/refresh_plots| jq
