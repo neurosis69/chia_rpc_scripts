@@ -1,12 +1,12 @@
 #!/bin/bash
-source initialize.sh
+
 curl -s --insecure \
-	--cert $SSLPATH/private_farmer.crt \
-	--key $SSLPATH/private_farmer.key \
+	--cert _SSLPATH_/private_farmer.crt \
+	--key _SSLPATH_/private_farmer.key \
 	-H "Content-Type: application/json" \
 	-d '{}' \
 	-X POST \
-	https://$TARGETIP:8559/get_harvesters \
+	https://_IP_:8559/get_harvesters \
 		| jq -r '
 			.harvesters[] 
 				| {
