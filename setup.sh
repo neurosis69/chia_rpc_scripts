@@ -2,6 +2,7 @@
 OSUSERHOME=`echo ~`
 SETUPSCRIPT=$(readlink -f "$0")
 BASEPATH=$(dirname "$SETUPSCRIPT")
+CSVPATH=${BASEPATH}/csv
 
 #declare array of chia service types
 declare -a SERVICETYPES=("farmer" "wallet" "full_node" "harvester")
@@ -22,6 +23,8 @@ SETUPTYPE=${SETUPTYPE:-"local"}
 		sed -s -i "s#_IP_#localhost#g" $BASEPATH/$i/*sh
 		#replace ssl path in shell scripts
 		sed -s -i "s#_SSLPATH_#$SSLPATH#g" $BASEPATH/$i/*sh
+		#change execute privs
+		chmod u+x $BASEPATH/$i/*sh
 	done
 } ||
 {
@@ -37,5 +40,12 @@ SETUPTYPE=${SETUPTYPE:-"local"}
 		sed -s -i "s#_IP_#$IP#g" $BASEPATH/$i/*sh
 		#replace ssl path in shell scripts
 		sed -s -i "s#_SSLPATH_#$SSLPATH#g" $BASEPATH/$i/*sh
+		#change execute privs
+		chmod u+x $BASEPATH/$i/*sh
 	done
 }
+
+#Pool related scripts
+sed -s -i "s#_CSVPATH_#$CSVPATH#g" $BASEPATH/pool_api/spacefarmers_api/*sh
+chmod u+x $BASEPATH/pool_api/*sh
+chmod u+x $BASEPATH/pool_api/spacefarmers_api/*sh

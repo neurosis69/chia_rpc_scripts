@@ -13,7 +13,7 @@ do
                  .data[]
                  |[$tim, .id,.attributes.points_24h,.attributes.ratio_24h,.attributes.tib_24h,.attributes.farmer_name]
                  |@csv
-                 ' | tee -a csv/spacefarmers_farmers_json_${TIMESTMP}.csv
+                 ' | tee -a _CSVPATH_/spacefarmers_farmers_json_${TIMESTMP}.csv
         TIMESTMP=`date +%Y%m%d`
         [[ `${CURL_CMD} ${BASE_URL}${FARMERS_API}${STARTPAGE} | jq '.links.next'` == "null" ]] && exit 1
         STARTPAGE=$((STARTPAGE+1))
