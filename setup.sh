@@ -11,7 +11,7 @@ read -p "Enter path to SSL cert/key files[$OSUSERHOME/.chia]:" SSLPATH
 SSLPATH=${SSLPATH:-$OSUSERHOME/.chia}
 
 for i in  ${SERVICETYPES[@]}; do
-        read -p "Enter path to SSL cert/key files[$BASEPATH/$i]:" $IP
+        read -p "Enter IP address of [$i]:" $IP
         sed -i "s#_IP_#$IP#g" $BASEPATH/$i/*sh
         sed -i "s#_SSLPATH_#$SSLPATH#g" $BASEPATH/$i/*sh
 done
