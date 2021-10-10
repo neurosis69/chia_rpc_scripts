@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURL_CMD="curl -s --insecure -d '{}' -H \"Content-Type: application/json\" -X GET"
+CURL_CMD="curl -s --connect-timeout _CONNTIMEOUT_ --max-time _MAXTIMEOUT_ --insecure -d '{}' -H \"Content-Type: application/json\" -X GET"
 BASE_URL="https://spacefarmers.io"
 FARMERS_API="/api/farmers?page="
 STARTPAGE=1

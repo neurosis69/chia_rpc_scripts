@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl -s --insecure \
+curl -s --connect-timeout _CONNTIMEOUT_ --max-time _MAXTIMEOUT_ --insecure \
 	--cert _SSLPATH_/private_farmer.crt \
 	--key _SSLPATH_/private_farmer.key \
 	-H "Content-Type: application/json" \
