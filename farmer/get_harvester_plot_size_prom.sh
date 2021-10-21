@@ -1,0 +1,4 @@
+#!/bin/bash
+
+curl -s --connect-timeout _CONNTIMEOUT_ --max-time _MAXTIMEOUT_ --insecure --cert _SSLPATH_/private_farmer.crt --key _SSLPATH_/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://_IP_:8559/get_harvesters | jq -r ' .harvesters[] | .connection.node_id as $k | "chia_nft_plots_size_bytes{coin=\"chia\",service_type=\"harvester\",harvester=\"\($k)\"} \( .plots | map(select(.pool_contract_puzzle_hash).file_size) | add )"'
+curl -s --connect-timeout _CONNTIMEOUT_ --max-time _MAXTIMEOUT_ --insecure --cert _SSLPATH_/private_farmer.crt --key _SSLPATH_/private_farmer.key -d '{}' -H "Content-Type: application/json" -X POST https://_IP_:8559/get_harvesters | jq -r ' .harvesters[] | .connection.node_id as $k | "chia_nft_plots_size_bytes{coin=\"chia\",service_type=\"harvester\",harvester=\"\($k)\"} \( .plots | map(select(.pool_public_key).file_size) | add )"'
