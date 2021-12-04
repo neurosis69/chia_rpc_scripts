@@ -21,12 +21,1326 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "gnetId": null,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": 32,
-  "iteration": 1636755270085,
+  "iteration": 1638655035534,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "collapsed": false,
+      "datasource": null,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 209,
+      "panels": [],
+      "title": "Bluebox Data",
+      "type": "row"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 0,
+        "y": 1
+      },
+      "id": 215,
+      "maxDataPoints": 20000,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Replaced compact proof\"[24h])",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Blocks compactified [24h]",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-yellow",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 3,
+        "y": 1
+      },
+      "id": 216,
+      "maxDataPoints": 20000,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Already compactified block\"[24h])",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Duplicates [24h]",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "4"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 6,
+        "y": 1
+      },
+      "id": 219,
+      "maxDataPoints": 20000,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap iterations [24h]) by (field_vdf)",
+          "legendFormat": "{{field_vdf}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Avg Iterations by vdf [24h]",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "super-light-blue",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 3,
+        "x": 0,
+        "y": 7
+      },
+      "id": 217,
+      "maxDataPoints": 20000,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Received compact proof\"[24h])",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Compact Blocks Received [24h]",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "4"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 6,
+        "y": 7
+      },
+      "id": 220,
+      "maxDataPoints": 20000,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap duration [24h]) by (field_vdf)",
+          "legendFormat": "{{field_vdf}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Avg Compaction Time by vdf [24h]",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 0,
+        "y": 13
+      },
+      "id": 213,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"Received compact proof\" | logfmt | unwrap height [$__interval]) by (bluebox_index)",
+          "legendFormat": "{{bluebox_index}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Heights by Blueboxes",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:4"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 20,
+        "x": 0,
+        "y": 21
+      },
+      "id": 211,
+      "interval": null,
+      "maxDataPoints": 20000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap iterations [1m]) by (field_vdf)",
+          "instant": false,
+          "legendFormat": "field_vdf:{{field_vdf}}",
+          "range": true,
+          "refId": "A",
+          "resolution": 1
+        }
+      ],
+      "title": "Iterations",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:4"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "field_vdf:2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 27
+      },
+      "id": 205,
+      "maxDataPoints": 500000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap iterations[1m]) by (field_vdf)\n/\navg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap duration[1m]) by (field_vdf)",
+          "hide": false,
+          "legendFormat": "field_vdf:{{field_vdf}}",
+          "refId": "H"
+        }
+      ],
+      "title": "avg iterations per second",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "points",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_compact_time_vdf_3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_compact_time_vdf_4"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_compact_time_vdf_1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "avg_compact_time_vdf_2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.pointSize",
+                "value": 5
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 34
+      },
+      "id": 207,
+      "maxDataPoints": 500000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "expr": "avg_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_finish\" | unwrap duration [1m]) by (field_vdf)",
+          "hide": false,
+          "legendFormat": "avg_compact_time_vdf_{{field_vdf}}",
+          "refId": "F"
+        }
+      ],
+      "title": "avg vdf compact time(s)",
+      "transformations": [],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Compactified"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Duplicate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Received"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 20,
+        "x": 0,
+        "y": 41
+      },
+      "id": 201,
+      "maxDataPoints": 2000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.2.3",
+      "targets": [
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Replaced compact proof\"[15m])",
+          "hide": false,
+          "legendFormat": "Compactified",
+          "refId": "A"
+        },
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Already compactified block\"[1m])",
+          "hide": false,
+          "legendFormat": "Duplicate",
+          "refId": "B"
+        },
+        {
+          "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Received compact proof\"[15m])",
+          "hide": false,
+          "legendFormat": "Received",
+          "refId": "C"
+        }
+      ],
+      "title": "Blocks compactified",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 900000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 49
+      },
+      "id": 203,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "expr": "min_over_time({job=\"timelord\"} |~ \"tag=\" | logfmt | tag = \"bluebox_launch\" | unwrap pending [1m]) by (unit)",
+          "hide": false,
+          "legendFormat": "queue_size",
+          "refId": "C"
+        }
+      ],
+      "title": "Pending Queue (count)",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Loki",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisGridShow": true,
+            "axisLabel": "",
+            "axisPlacement": "right",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": 3600000,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "wip"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "free_clients"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 56
+      },
+      "id": 206,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "expr": "min_over_time(\n  {job=\"timelord\"}\n  |~ \"tag=compact_launch\"\n  | pattern `<tsLocal> <service> <module>: <level> tag=<tag> <_> pending=<pending> wip=<wip> free_clients=<free>`\n  | unwrap wip [1m]\n) by (unit)",
+          "hide": false,
+          "legendFormat": "wip",
+          "refId": "B"
+        },
+        {
+          "expr": "min_over_time(\n  {job=\"timelord\"}\n  |~ \"tag=compact_launch\"\n  | pattern `<tsLocal> <service> <module>: <level> tag=<tag> <_> pending=<pending> wip=<wip> free_clients=<free>`\n  | unwrap free [1m]\n) by (unit)",
+          "hide": false,
+          "legendFormat": "free_clients",
+          "refId": "C"
+        },
+        {
+          "expr": "min_over_time(\n  {job=\"timelord\"}\n  |~ \"tag=bluebox_launch\"\n  | pattern `<tsLocal> <service> <module>: <level> tag=<tag> <_> pending=<pending> wip=<wip> free_clients=<free>`\n  | unwrap wip [1m]\n) by (unit)",
+          "hide": false,
+          "legendFormat": "wip",
+          "refId": "A"
+        },
+        {
+          "expr": "min_over_time(\n  {job=\"timelord\"}\n  |~ \"tag=bluebox_launch\"\n  | pattern `<tsLocal> <service> <module>: <level> tag=<tag> <_> pending=<pending> wip=<wip> free_clients=<free>`\n  | unwrap free [1m]\n) by (unit)",
+          "hide": false,
+          "legendFormat": "free_clients",
+          "refId": "D"
+        }
+      ],
+      "title": "wip/free",
+      "transparent": true,
+      "type": "timeseries"
+    },
     {
       "collapsed": true,
       "datasource": null,
@@ -34,7 +1348,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 63
       },
       "id": 130,
       "panels": [
@@ -46,6 +1360,7 @@
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisGridShow": true,
                 "axisLabel": "",
                 "axisPlacement": "right",
                 "barAlignment": 0,
@@ -59,7 +1374,7 @@
                 },
                 "lineInterpolation": "linear",
                 "lineWidth": 1,
-                "pointSize": 5,
+                "pointSize": 3,
                 "scaleDistribution": {
                   "type": "linear"
                 },
@@ -88,19 +1403,54 @@
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "timelord"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.pointSize",
+                    "value": 2
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "fullnode"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-blue",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 7,
             "w": 20,
             "x": 0,
-            "y": 1
+            "y": 50
           },
           "id": 128,
           "options": {
             "legend": {
               "calcs": [],
-              "displayMode": "hidden",
+              "displayMode": "list",
               "placement": "bottom"
             },
             "tooltip": {
@@ -109,13 +1459,288 @@
           },
           "targets": [
             {
-              "expr": "avg_over_time({chia_service_type=\"full_node\"}|~\"Added unfinished_block\"|pattern \"<_> validation time: <block_validation_time> seconds, <_>\"|unwrap block_validation_time[15s])",
+              "expr": "avg_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Added unfinished_block\"|pattern \"<_> validation time: <block_validation_time> seconds, <_>\"|unwrap block_validation_time[15s])",
+              "legendFormat": "{{job}}",
               "refId": "A"
+            },
+            {
+              "expr": "avg_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Added unfinished_block\"|pattern \"<_> validation time: <block_validation_time> seconds, <_>\"|unwrap block_validation_time[15s])",
+              "hide": false,
+              "legendFormat": "{{job}}",
+              "refId": "B"
             }
           ],
           "title": "Block Validation Time(s)",
           "transparent": true,
           "type": "timeseries"
+        },
+        {
+          "datasource": "Loki",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisGridShow": true,
+                "axisLabel": "",
+                "axisPlacement": "right",
+                "barAlignment": 0,
+                "drawStyle": "points",
+                "fillOpacity": 33,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 2,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "max": 80,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "SS_fullnode"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-yellow",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.drawStyle",
+                    "value": "points"
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "fullnode",
+                      "mode": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "SP_fullnode"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "fullnode",
+                      "mode": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "SS_timelord"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-yellow",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.drawStyle",
+                    "value": "points"
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "timelord",
+                      "mode": "normal"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "SP_timelord"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-blue",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.stacking",
+                    "value": {
+                      "group": "timelord",
+                      "mode": "normal"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 20,
+            "x": 0,
+            "y": 57
+          },
+          "id": 199,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "targets": [
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Finished sub slot\"[10m])",
+              "hide": false,
+              "legendFormat": "SS_{{job}}",
+              "refId": "A"
+            },
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Finished signage point\"[10m])",
+              "hide": false,
+              "legendFormat": "SP_{{job}}",
+              "refId": "B"
+            },
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Finished sub slot\"[10m])",
+              "hide": false,
+              "legendFormat": "SS_{{job}}",
+              "refId": "C"
+            },
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"timelord\"}|~\"Finished signage point\"[10m])",
+              "hide": false,
+              "legendFormat": "SP_{{job}}",
+              "refId": "D"
+            }
+          ],
+          "title": "Signage Points",
+          "transparent": true,
+          "type": "timeseries"
+        },
+        {
+          "cards": {
+            "cardPadding": null,
+            "cardRound": null
+          },
+          "color": {
+            "cardColor": "#b4ff00",
+            "colorScale": "sqrt",
+            "colorScheme": "interpolateRdYlGn",
+            "exponent": 0.5,
+            "mode": "spectrum"
+          },
+          "dataFormat": "timeseries",
+          "datasource": "Loki",
+          "gridPos": {
+            "h": 7,
+            "w": 20,
+            "x": 0,
+            "y": 64
+          },
+          "heatmap": {},
+          "hideZeroBuckets": false,
+          "highlightCards": true,
+          "id": 200,
+          "legend": {
+            "show": false
+          },
+          "maxDataPoints": 2000,
+          "pluginVersion": "8.2.3",
+          "reverseYBuckets": false,
+          "targets": [
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Finished sub slot\"[10m])",
+              "hide": true,
+              "legendFormat": "SS",
+              "refId": "A"
+            },
+            {
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Finished signage point|Finished sub slot\"[10m])",
+              "hide": false,
+              "legendFormat": "SP_{{job}}",
+              "refId": "B"
+            }
+          ],
+          "title": "Signage Points - fullnode",
+          "tooltip": {
+            "show": false,
+            "showHistogram": false
+          },
+          "transparent": true,
+          "type": "heatmap",
+          "xAxis": {
+            "show": true
+          },
+          "xBucketNumber": null,
+          "xBucketSize": "1",
+          "yAxis": {
+            "decimals": null,
+            "format": "short",
+            "logBase": 1,
+            "max": "73",
+            "min": "56",
+            "show": true,
+            "splitFactor": null
+          },
+          "yBucketBound": "auto",
+          "yBucketNumber": null,
+          "yBucketSize": 1
         },
         {
           "datasource": "Loki",
@@ -175,7 +1800,7 @@
             "h": 8,
             "w": 10,
             "x": 0,
-            "y": 8
+            "y": 71
           },
           "id": 125,
           "options": {
@@ -255,7 +1880,7 @@
             "h": 8,
             "w": 10,
             "x": 10,
-            "y": 8
+            "y": 71
           },
           "id": 126,
           "options": {
@@ -334,7 +1959,7 @@
             "h": 7,
             "w": 10,
             "x": 0,
-            "y": 16
+            "y": 79
           },
           "id": 120,
           "options": {
@@ -349,7 +1974,7 @@
           },
           "targets": [
             {
-              "expr": "count_over_time({chia_service_type=\"full_node\"}|~\"Don't have signage point\"[1m])",
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Don't have signage point\"[1m])",
               "refId": "A"
             }
           ],
@@ -369,7 +1994,7 @@
                 "axisLabel": "",
                 "axisPlacement": "right",
                 "barAlignment": 0,
-                "drawStyle": "bars",
+                "drawStyle": "points",
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
@@ -415,7 +2040,7 @@
             "h": 7,
             "w": 10,
             "x": 10,
-            "y": 16
+            "y": 79
           },
           "id": 115,
           "options": {
@@ -430,7 +2055,7 @@
           },
           "targets": [
             {
-              "expr": "avg_over_time({chia_service_type=\"full_node\"}|~\"Size of mempool\"|pattern \"<_> Size of mempool: <mempool_size> spends, <_>\"|unwrap mempool_size [30s])",
+              "expr": "avg_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Size of mempool\"|pattern \"<_> Size of mempool: <mempool_size> spends, <_>\"|unwrap mempool_size [30s])",
               "refId": "A"
             }
           ],
@@ -495,7 +2120,7 @@
             "h": 8,
             "w": 10,
             "x": 0,
-            "y": 23
+            "y": 86
           },
           "id": 117,
           "options": {
@@ -510,7 +2135,7 @@
           },
           "targets": [
             {
-              "expr": "count_over_time({chia_service_type=\"full_node\"}|~\"Don't have rc hash\"[1m])",
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Don't have rc hash\"[1m])",
               "refId": "A"
             }
           ],
@@ -577,7 +2202,7 @@
             "h": 8,
             "w": 10,
             "x": 10,
-            "y": 23
+            "y": 86
           },
           "id": 118,
           "options": {
@@ -592,7 +2217,7 @@
           },
           "targets": [
             {
-              "expr": "max_over_time({chia_service_type=\"full_node\"}|~\"Size of mempool\"|pattern \"<_> cost: <mempool_cost> <_>\"|unwrap mempool_cost[30s])",
+              "expr": "max_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Size of mempool\"|pattern \"<_> cost: <mempool_cost> <_>\"|unwrap mempool_cost[30s])",
               "refId": "A"
             }
           ],
@@ -657,7 +2282,7 @@
             "h": 8,
             "w": 10,
             "x": 0,
-            "y": 31
+            "y": 94
           },
           "id": 121,
           "options": {
@@ -672,7 +2297,7 @@
           },
           "targets": [
             {
-              "expr": "count_over_time({chia_service_type=\"full_node\"}|~\"cache miss for block\"[1m])",
+              "expr": "count_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"cache miss for block\"[1m])",
               "refId": "A"
             }
           ],
@@ -740,7 +2365,7 @@
             "h": 8,
             "w": 10,
             "x": 10,
-            "y": 31
+            "y": 94
           },
           "id": 113,
           "interval": null,
@@ -757,7 +2382,7 @@
           },
           "targets": [
             {
-              "expr": "avg_over_time({chia_service_type=\"full_node\"}|~\"Added unfinished_block\"|pattern \"<_> percent full: <block_percentage>%\"|unwrap block_percentage [30s])",
+              "expr": "avg_over_time({chia_service_type=\"full_node\",job=\"fullnode\"}|~\"Added unfinished_block\"|pattern \"<_> percent full: <block_percentage>%\"|unwrap block_percentage [30s])",
               "instant": false,
               "maxLines": null,
               "range": true,
@@ -782,7 +2407,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 64
       },
       "id": 23,
       "panels": [
@@ -810,7 +2435,7 @@
             "h": 2,
             "w": 3,
             "x": 0,
-            "y": 40
+            "y": 53
           },
           "id": 24,
           "options": {
@@ -828,7 +2453,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -900,7 +2525,7 @@
             "h": 5,
             "w": 7,
             "x": 3,
-            "y": 40
+            "y": 53
           },
           "id": 12,
           "options": {
@@ -992,7 +2617,7 @@
             "h": 7,
             "w": 10,
             "x": 10,
-            "y": 40
+            "y": 53
           },
           "id": 88,
           "options": {
@@ -1044,7 +2669,7 @@
             "h": 2,
             "w": 3,
             "x": 0,
-            "y": 42
+            "y": 55
           },
           "id": 26,
           "options": {
@@ -1062,7 +2687,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -1133,7 +2758,7 @@
             "h": 5,
             "w": 10,
             "x": 0,
-            "y": 45
+            "y": 58
           },
           "id": 21,
           "options": {
@@ -1185,7 +2810,7 @@
             "h": 9,
             "w": 14,
             "x": 10,
-            "y": 47
+            "y": 60
           },
           "id": 28,
           "options": {
@@ -1203,7 +2828,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": false,
@@ -1231,7 +2856,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 2
+        "y": 65
       },
       "id": 8,
       "panels": [
@@ -1480,6 +3105,31 @@
                     }
                   }
                 ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "avg diff last 30d"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#ffffff",
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        30
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
               }
             ]
           },
@@ -1487,7 +3137,7 @@
             "h": 10,
             "w": 24,
             "x": 0,
-            "y": 62
+            "y": 4
           },
           "hideTimeOverride": false,
           "id": 6,
@@ -1516,7 +3166,7 @@
             },
             {
               "exemplar": true,
-              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.9862",
+              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.98619",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -1526,7 +3176,7 @@
             },
             {
               "exemplar": false,
-              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.9862*1.1",
+              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.98619*1.1",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -1536,7 +3186,7 @@
             },
             {
               "exemplar": false,
-              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.9862*0.9",
+              "expr": "chia_nft_plots_size_bytes{instance=\"192.168.1.202:9100\"}/1024/1024/1024/1024*100.98619*0.9",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -1556,11 +3206,11 @@
             },
             {
               "exemplar": true,
-              "expr": "avg_over_time(api_farmers_self_points24h{}[3d])",
-              "hide": true,
+              "expr": "avg_over_time(api_farmers_self_points24h{}[30d])",
+              "hide": false,
               "instant": false,
               "interval": "",
-              "legendFormat": "avg diff last 3d",
+              "legendFormat": "avg diff last 30d",
               "refId": "A"
             }
           ],
@@ -1606,7 +3256,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 72
+            "y": 14
           },
           "id": 14,
           "interval": null,
@@ -1675,7 +3325,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 78
+            "y": 20
           },
           "id": 15,
           "interval": "60m",
@@ -1768,7 +3418,7 @@
             "h": 9,
             "w": 8,
             "x": 0,
-            "y": 85
+            "y": 27
           },
           "id": 2,
           "options": {
@@ -1858,7 +3508,7 @@
             "h": 9,
             "w": 11,
             "x": 8,
-            "y": 85
+            "y": 27
           },
           "id": 4,
           "maxDataPoints": null,
@@ -1944,7 +3594,7 @@
             "h": 8,
             "w": 20,
             "x": 0,
-            "y": 94
+            "y": 36
           },
           "id": 123,
           "options": {
@@ -1996,10 +3646,10 @@
                     "config": {
                       "id": "equal",
                       "options": {
-                        "value": "\"Zak van Klooten\""
+                        "value": "7d8b52b55c88de3809a51dbd5f7c110fb3262aded2b648ff34162de85047b75d"
                       }
                     },
-                    "fieldName": "FarmerName"
+                    "fieldName": "LauncherID"
                   }
                 ],
                 "match": "any",
@@ -2021,7 +3671,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 3
+        "y": 66
       },
       "id": 60,
       "panels": [
@@ -2050,7 +3700,7 @@
             "h": 2,
             "w": 3,
             "x": 0,
-            "y": 4
+            "y": 47
           },
           "id": 56,
           "options": {
@@ -2068,7 +3718,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2109,7 +3759,7 @@
             "h": 2,
             "w": 3,
             "x": 3,
-            "y": 4
+            "y": 47
           },
           "id": 86,
           "options": {
@@ -2127,7 +3777,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2168,7 +3818,7 @@
             "h": 2,
             "w": 3,
             "x": 6,
-            "y": 4
+            "y": 47
           },
           "id": 58,
           "options": {
@@ -2186,7 +3836,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2227,7 +3877,7 @@
             "h": 2,
             "w": 3,
             "x": 9,
-            "y": 4
+            "y": 47
           },
           "id": 75,
           "options": {
@@ -2245,7 +3895,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2286,7 +3936,7 @@
             "h": 2,
             "w": 3,
             "x": 12,
-            "y": 4
+            "y": 47
           },
           "id": 110,
           "options": {
@@ -2304,7 +3954,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2345,7 +3995,7 @@
             "h": 2,
             "w": 3,
             "x": 0,
-            "y": 6
+            "y": 49
           },
           "id": 84,
           "options": {
@@ -2363,7 +4013,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2404,7 +4054,7 @@
             "h": 2,
             "w": 3,
             "x": 3,
-            "y": 6
+            "y": 49
           },
           "id": 85,
           "options": {
@@ -2422,7 +4072,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2463,7 +4113,7 @@
             "h": 2,
             "w": 3,
             "x": 6,
-            "y": 6
+            "y": 49
           },
           "id": 91,
           "options": {
@@ -2481,7 +4131,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2522,7 +4172,7 @@
             "h": 2,
             "w": 3,
             "x": 9,
-            "y": 6
+            "y": 49
           },
           "id": 92,
           "options": {
@@ -2540,7 +4190,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2581,7 +4231,7 @@
             "h": 2,
             "w": 3,
             "x": 12,
-            "y": 6
+            "y": 49
           },
           "id": 111,
           "options": {
@@ -2599,7 +4249,7 @@
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "8.2.2",
+          "pluginVersion": "8.2.3",
           "targets": [
             {
               "exemplar": true,
@@ -2626,7 +4276,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 4
+        "y": 67
       },
       "id": 10,
       "panels": [
@@ -3637,7 +5287,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 5
+        "y": 68
       },
       "id": 45,
       "panels": [
@@ -4577,7 +6227,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 6
+        "y": 69
       },
       "id": 64,
       "panels": [
@@ -5518,7 +7168,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 70
       },
       "id": 94,
       "panels": [
@@ -6459,7 +8109,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 71
       },
       "id": 132,
       "panels": [
@@ -7400,7 +9050,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 9
+        "y": 72
       },
       "id": 134,
       "panels": [
@@ -8341,7 +9991,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 73
       },
       "id": 136,
       "panels": [
@@ -9282,7 +10932,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 74
       },
       "id": 138,
       "panels": [
@@ -10217,7 +11867,7 @@
       "type": "row"
     }
   ],
-  "refresh": "",
+  "refresh": "1m",
   "schemaVersion": 31,
   "style": "dark",
   "tags": [],
@@ -10308,12 +11958,12 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Spacefarmers.io",
   "uid": "KCaDelI7z",
-  "version": 172
+  "version": 226
 }
